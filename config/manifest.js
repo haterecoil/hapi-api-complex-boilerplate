@@ -34,7 +34,11 @@ const manifest = {
       stripTrailingSlash: true,
     },
   }],
-  registrations: [],
+  registrations: [
+    {
+      plugin: './api',
+    },
+  ],
 };
 
 module.exports = manifest;
