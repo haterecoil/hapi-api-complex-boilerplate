@@ -1,18 +1,25 @@
 /**
  * File exectued on npm start, it starts the server on options defiend in /config/manifest
  */
-const Hapi = require('hapi');
 
-const server = new Hapi.Server();
+// Glue could seem overkill but it is nice to keep all server configuration in a file
+const Glue = require('glue');
 
-server.connection({
-  host: 'localhost',
-  port: 1337,
-});
+const manifest = require('./config/manifest');
 
-server.start((err) => {
+if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+  manifest.registrations.push({
+    plugin: {
+      register: 'blipp',
+    },
+  });
+}
+
+Glue.compose(manifest, { relativeTo: __dirname }, (err, server) => {
   if (err) {
-    throw err;
+    console.log('server.register err:', err);
   }
-  console.log('Server is running on', server.info.uri);
+  server.start(() => {
+    console.log('Server is listening on ', server.info.uri);
+  });
 });
