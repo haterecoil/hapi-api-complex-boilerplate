@@ -18,8 +18,6 @@ exports.register = (server, options, next) => {
       verifyOptions: { algorithms: ['HS512'] },
     });
 
-    server.auth.default('jwt');
-
     return next();
   }
 

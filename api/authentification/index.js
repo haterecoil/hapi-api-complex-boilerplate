@@ -5,8 +5,8 @@ const Authentification = require('./handlers');
 
 //   using plugins for project's organization because it allows easy refactoring if needed
 // while adding little to no overload to code readability and writing efficiency
-exports.register = (plugin, options, next) => {
-  plugin.route([
+exports.register = (server, options, next) => {
+  server.route([
     {
       method: 'GET',
       path: '/token',
@@ -18,5 +18,7 @@ exports.register = (plugin, options, next) => {
 };
 
 exports.register.attributes = {
-  name: 'authentification',
+  pkg: {
+    name: 'authentification',
+  },
 };
