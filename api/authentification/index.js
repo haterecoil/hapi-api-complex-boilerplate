@@ -7,7 +7,7 @@
  -> Return a signed Json Web Token(JWT, https://jwt.io/) which can be used to validate future requests.
  */
 const AuthentificationHandler = require('./handlers');
-const TokenManager = require('./TokenManager');
+const TokenManager = require('./lib/TokenManager');
 
 // using plugins for project's organization because it allows easy refactoring if needed
 // while adding little to no overload to code readability and writing efficiency

@@ -1,17 +1,17 @@
 /**
  * Created by moka on 04/05/2017.
  */
-const Hapi = require('hapi');
 const Lab = require('lab');
 const expect = require('chai').expect;
-const plugin = require('../');
+
+const TokenManager = require('./TokenManager')
+const basicServer = require('./basicServer');
+
 // init lab
 const lab = Lab.script();
 exports.lab = lab;
 
-const TokenManager = require('../TokenManager')
 
-const basicServer = require('./basicServer');
 
 lab.test('TokenManager setting should have defaults options', (done) => {
   const tokenManager = new TokenManager();

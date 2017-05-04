@@ -3,9 +3,10 @@
  */
 const Hapi = require('hapi');
 const Lab = require('lab');
-const Boom = require('boom');
+
 const expect = require('chai').expect;
-const plugin = require('../');
+const plugin = require('./index');
+
 // init lab
 const lab = Lab.script();
 exports.lab = lab;
