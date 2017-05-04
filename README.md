@@ -13,12 +13,9 @@ A microservice handling :
 
 Routes
 
-```
 |verb|route|payload|comment|
 |----|-----|-------|-------|
 |POST  | /token | {username: string, password: string} | returns a JWT|
-
-```
 
 ## Install
 
