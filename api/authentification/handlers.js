@@ -19,10 +19,16 @@ class AuthentificationHandler {
   getJwtToken() {
     const tokenManager = this.tokenManager;
     const requestSchema = Joi.object().keys({
-      username: Joi.string().allow('').required(),
-      password: Joi.string().allow('').required()
+      username: Joi.string().allow('').required().description('Any string'),
+      password: Joi.string().allow('').required().description('Any string')
     });
     return {
+      tags: ['api'],
+      description: 'Provides a JWT',
+      notes: 'Any username/password combination is okay',
+      validate: {
+        payload: requestSchema
+      },
       handler(request, reply) {
         // todo check username and password in request
         const requestValidation = Joi.validate(request.payload, requestSchema);

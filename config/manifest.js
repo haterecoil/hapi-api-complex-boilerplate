@@ -60,6 +60,28 @@ const manifest = {
       }
     },
     {
+      plugin: 'inert'
+    },
+    {
+      plugin: 'vision'
+    },
+    {
+      plugin: {
+        register: 'hapi-swagger',
+        options: {
+          info: {
+            title: 'An API with JWT authentification to resize images and patch JSONs',
+            version: '0.1',
+            contact: {
+              name: 'Morgan Caron',
+              email: 'morgancebe@gmail.com'
+            }
+          },
+          schemes: ['http']
+        }
+      }
+    },
+    {
       plugin: './middlewares/jwt-auth-strategy'
     },
     {
