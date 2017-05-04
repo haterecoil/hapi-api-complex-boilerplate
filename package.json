@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "boom": "^4.3.1",
     "glue": "^4.1.0",
     "hapi": "^16.1.1",
     "hapi-auth-jwt2": "^7.2.4",
+    "joi": "^10.4.1",
     "jsonwebtoken": "^7.4.0"
   },
   "devDependencies": {
