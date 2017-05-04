@@ -29,4 +29,15 @@ Routes
 
 Inspired by Django. Uses Hapi plugins to organize endpoints.
 
+`/server.js` reads `config/manifest` and composes a server with Glue.
+
+The manifest registers the application's fragments contained in `/api`.
+
+Each fragment casts its own routing, but you can add a route prefix in the `manifest`
+and provide options to customize plugins behaviours.
+
+/!\ The configuration management is clumsy, there are lots of improvements to do,
+maybe with `node-config`.
+
+
 
