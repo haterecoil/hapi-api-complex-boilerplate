@@ -3,13 +3,17 @@
  */
 const Lab = require('lab');
 const should = require('chai');
+const Server = require('../../server');
 
+// init lab
 const lab = Lab.script();
 exports.lab = lab;
 
+// init chai's should
 should.should();
 
-lab.test('returns true when 1 + 1 equals 2', (done) => {
+// tests
+lab.test('server should', (done) => {
   const operation = 1 + 1;
   operation.should.equal(2);
   done();

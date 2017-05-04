@@ -12,12 +12,16 @@ const envKey = (key) => {
 
   const configuration = {
     development: {
-      host: 'localhost',
-      port: 1337,
+      serverHost: 'localhost',
+      serverPort: 1337,
+      jwtExpiresIn: '19h',
+      jwtSecret: 'secretOverride',
     },
     production: {
-      host: process.env.HOST,
-      port: process.env.PORT,
+      serverHost: process.env.SERVER_HOST,
+      serverPort: process.env.SERVER_PORT,
+      jwtExpiresIn: process.env.JWT_EXPIRES_IN,
+      jwtSecret: process.env.JWT_SECRET_KEY,
     },
   };
   return configuration[env][key];
@@ -25,8 +29,8 @@ const envKey = (key) => {
 
 const manifest = {
   connections: [{
-    host: envKey('host'),
-    port: envKey('port'),
+    host: envKey('serverHost'),
+    port: envKey('serverPort'),
     routes: {
       cors: true,
     },
@@ -36,7 +40,16 @@ const manifest = {
   }],
   registrations: [
     {
-      plugin: './api',
+      plugin: './middlewares/jwt-auth-strategy',
+    },
+    {
+      plugin: {
+        register: './api/authentification',
+        options: {
+          expiresIn: envKey('jwtExpiresIn'),
+          secret: envKey('jwtSecret'),
+        },
+      },
     },
   ],
 };

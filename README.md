@@ -10,7 +10,10 @@ A microservice handling :
 
 Routes
 
+```
+/auth/jwt
 
+```
 
 ## Install
 
