@@ -13,9 +13,7 @@ class TokenManager {
     if (customConfig) {
       this.config = Object.assign({}, this.config, customConfig);
     } else {
-      // todo: log better
       // todo: use joi to point out important options ?
-      console.warn('There are no options');
     }
   }
 
@@ -25,7 +23,7 @@ class TokenManager {
       this.config.secret,
       { expiresIn: this.config.expiresIn }
     );
-  };
-};
+  }
+}
 
 module.exports = TokenManager;

@@ -1,14 +1,13 @@
 /*
-Public Endpoint
+ Public Endpoint
 
-/login
--> Request body should contain an arbitrary username/password pair
--> Treat it as a mock authentication service and accept any username/password.
--> Return a signed Json Web Token(JWT, https://jwt.io/) which can be used to validate future requests.
-*/
+ /login
+ -> Request body should contain an arbitrary username/password pair
+ -> Treat it as a mock authentication service and accept any username/password.
+ -> Return a signed Json Web Token(JWT, https://jwt.io/) which can be used to validate future requests.
+ */
 const AuthentificationHandler = require('./handlers');
 const TokenManager = require('./TokenManager');
-const Joi = require('joi');
 
 // using plugins for project's organization because it allows easy refactoring if needed
 // while adding little to no overload to code readability and writing efficiency
@@ -28,6 +27,8 @@ exports.register = (server, options, next) => {
 
   server.expose({ authentificationHandler });
   server.expose({ tokenManager });
+
+  server.log(['info', 'registration'], 'registered authentification app');
 
   next();
 };

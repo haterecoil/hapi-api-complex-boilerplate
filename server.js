@@ -17,9 +17,9 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
 
 Glue.compose(manifest, { relativeTo: __dirname }, (err, server) => {
   if (err) {
-    console.log('server.register err:', err);
+    server.log(['error', 'server', 'registration'], err);
   }
   server.start(() => {
-    console.log('Server is listening on ', server.info.uri);
+    server.log(['info', 'server', 'listens'], server.info.uri);
   });
 });

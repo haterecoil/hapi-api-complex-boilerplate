@@ -15,14 +15,14 @@ const envKey = (key) => {
       serverHost: 'localhost',
       serverPort: 1337,
       jwtExpiresIn: '19h',
-      jwtSecret: 'manifestSecret',
+      jwtSecret: 'manifestSecret'
     },
     production: {
       serverHost: process.env.SERVER_HOST,
       serverPort: process.env.SERVER_PORT,
       jwtExpiresIn: process.env.JWT_EXPIRES_IN,
-      jwtSecret: process.env.JWT_SECRET_KEY,
-    },
+      jwtSecret: process.env.JWT_SECRET_KEY
+    }
   };
   return configuration[env][key];
 };
@@ -32,26 +32,46 @@ const manifest = {
     host: envKey('serverHost'),
     port: envKey('serverPort'),
     routes: {
-      cors: true,
+      cors: true
     },
     router: {
-      stripTrailingSlash: true,
-    },
+      stripTrailingSlash: true
+    }
   }],
   registrations: [
     {
-      plugin: './middlewares/jwt-auth-strategy',
+      plugin: {
+        register: 'good',
+        options: {
+          reporters: {
+            console: [
+              {
+                module: 'good-squeeze',
+                name: 'Squeeze',
+                args: [{ response: '*', log: '*' }]
+              },
+              {
+                module: 'good-console'
+              },
+              'stdout'
+            ]
+          }
+        }
+      }
+    },
+    {
+      plugin: './middlewares/jwt-auth-strategy'
     },
     {
       plugin: {
         register: './api/authentification',
         options: {
           expiresIn: envKey('jwtExpiresIn'),
-          secret: envKey('jwtSecret'),
-        },
-      },
-    },
-  ],
+          secret: envKey('jwtSecret')
+        }
+      }
+    }
+  ]
 };
 
 module.exports = manifest;
