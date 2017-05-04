@@ -6,16 +6,18 @@ server.connection();
 
 const config = {
   expiresIn: '1h',
-  secret: 'testSecret',
+  secret: 'testSecret'
 };
 
-server.register(
-  {
-    register: plugin,
-    options: {
-      expiresIn: config.expiresIn,
-      secret: config.secret,
-    },
-  });
+server.register({
+  register: plugin,
+  options: {
+    expiresIn: config.expiresIn,
+    secret: config.secret
+  }
+});
 
-module.exports = server;
+module.exports = {
+  server,
+  config
+};

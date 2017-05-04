@@ -15,7 +15,7 @@ const envKey = (key) => {
       serverHost: 'localhost',
       serverPort: 1337,
       jwtExpiresIn: '19h',
-      jwtSecret: 'secretOverride',
+      jwtSecret: 'manifestSecret',
     },
     production: {
       serverHost: process.env.SERVER_HOST,
