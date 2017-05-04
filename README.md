@@ -36,6 +36,11 @@ The manifest registers the application's fragments contained in `/api`.
 Each fragment casts its own routing, but you can add a route prefix in the `manifest`
 and provide options to customize plugins behaviours.
 
+Such fragments have several advantages :
+- Readability : when you work on a feature, everything is on the same folder
+- Portability : you can copy/paste it in another Hapi project based on the same structure and it
+should work without modification
+
 /!\ The configuration management is clumsy, there are lots of improvements to do,
 maybe with `node-config`.
 
