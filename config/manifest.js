@@ -83,7 +83,7 @@ const manifest = {
     },
     {
       plugin: {
-        register: './middlewares/jwt-auth-strategy',
+        register: './middlewares/jwtAuthStrategy',
         options: {
           jwtSecret: envKey('jwtSecret')
         }
@@ -101,6 +101,11 @@ const manifest = {
     {
       plugin: {
         register: './api/jsonpatch'
+      }
+    },
+    {
+      plugin: {
+        register: './api/imageresize'
       }
     }
   ]

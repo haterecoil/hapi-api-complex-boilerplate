@@ -6,29 +6,34 @@
  -> Apply the json patch to the json object, and return the resulting json object.
 
  */
-const JsonpatchHandler = require('./handlers');
+const ImageResize = require('./handlers');
 
 exports.register = (server, options, next) => {
   server.route([
     {
       method: 'POST',
-      path: '/json/patch',
+      path: '/image/thumbnail',
       config: Object.assign({}, {
         tags: ['api'],
-        description: 'Patches a JSON',
-        notes: 'Needs a JSON object and an array of JSON patches http://jsonpatch.com/',
-        auth: 'jwt' },
-        JsonpatchHandler.getPatchHandler())
+        description: 'Resizes an image at 50px',
+        notes: 'Needs a public image URI',
+        plugins: {
+          'hapi-swagger': {
+            produces: ['image']
+          }
+        },
+        auth: false },
+        ImageResize.getThumbnailHandler())
     }
   ]);
 
-  server.log(['info', 'registration'], 'registered jsonpatch app');
+  server.log(['info', 'registration'], 'registered imageresize app');
 
   next();
 };
 
 exports.register.attributes = {
   pkg: {
-    name: 'jsonpatch'
+    name: 'imageresize'
   }
 };

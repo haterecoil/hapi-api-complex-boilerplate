@@ -7,12 +7,15 @@
     "boom": "^4.3.1",
     "fast-json-patch": "^1.1.9",
     "glue": "^4.1.0",
+    "got": "^6.7.1",
     "hapi": "^16.1.1",
     "hapi-auth-jwt2": "^7.2.4",
     "hapi-swagger": "^7.7.0",
     "inert": "^4.2.0",
     "joi": "^10.4.1",
     "jsonwebtoken": "^7.4.0",
+    "request": "^2.81.0",
+    "sharp": "^0.17.3",
     "vision": "^4.1.1"
   },
   "devDependencies": {
