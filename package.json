@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "boom": "^4.3.1",
+    "fast-json-patch": "^1.1.9",
     "glue": "^4.1.0",
     "hapi": "^16.1.1",
     "hapi-auth-jwt2": "^7.2.4",
@@ -27,7 +28,7 @@
   },
   "scripts": {
     "start": "node server.js",
-    "test": "./node_modules/.bin/lab api -c"
+    "test": "./node_modules/.bin/lab api -cv --coverage-exclude middlewares;"
   },
   "keywords": [],
   "author": "",

@@ -82,7 +82,12 @@ const manifest = {
       }
     },
     {
-      plugin: './middlewares/jwt-auth-strategy'
+      plugin: {
+        register: './middlewares/jwt-auth-strategy',
+        options: {
+          jwtSecret: envKey('jwtSecret')
+        }
+      }
     },
     {
       plugin: {
@@ -91,6 +96,11 @@ const manifest = {
           expiresIn: envKey('jwtExpiresIn'),
           secret: envKey('jwtSecret')
         }
+      }
+    },
+    {
+      plugin: {
+        register: './api/jsonpatch'
       }
     }
   ]

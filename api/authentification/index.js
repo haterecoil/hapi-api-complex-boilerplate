@@ -21,7 +21,12 @@ exports.register = (server, options, next) => {
     {
       method: 'POST',
       path: '/token',
-      config: authentificationHandler.getJwtToken()
+      config: Object.assign({}, {
+        tags: ['api'],
+        description: 'Provides a JWT',
+        notes: 'Any username/password combination is okay',
+        auth: false, },
+        authentificationHandler.getJwtToken())
     }
   ]);
 

@@ -3,7 +3,6 @@
  */
 
 const Joi = require('joi');
-const Boom = require('boom');
 
 class AuthentificationHandler {
   constructor(tokenManager) {
@@ -23,9 +22,6 @@ class AuthentificationHandler {
       password: Joi.string().allow('').required().description('Any string')
     });
     return {
-      tags: ['api'],
-      description: 'Provides a JWT',
-      notes: 'Any username/password combination is okay',
       validate: {
         payload: requestSchema
       },

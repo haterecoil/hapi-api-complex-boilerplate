@@ -1,3 +1,37 @@
-/**
- * Created by moka on 05/05/2017.
- */
+const Joi = require('joi');
+const Boom = require('boom');
+const jsonpatch = require('fast-json-patch');
+
+class JsonpatchHandler {
+  static getPatchHandler() {
+    const requestSchema = Joi.object().keys({
+      jsonToPatch: Joi.object().required().min(1).description('A JSON object to patch'),
+      patches: Joi.array().items(Joi.object().required().min(1)).required().description('An array of valid JSON patches')
+    });
+    return {
+      validate: {
+        payload: requestSchema,
+        headers: Joi.object({ authorization: Joi.string().required() }).unknown()
+      },
+      handler(request, reply){
+        try {
+          reply(
+            JsonpatchHandler.patch(request.payload.jsonToPatch, request.payload.patches)
+          );
+        } catch (err) {
+          reply(Boom.badRequest());
+        }
+      }
+    };
+  }
+
+  static patch(jsonToPatch, patches) {
+    const validate = patches.length > 1000;
+    jsonpatch.apply(jsonToPatch, patches, validate);
+    // jsonpatch.apply modifies the jsonToPatch object, but for convenience we can juste
+    // return the value
+    return jsonToPatch;
+  }
+}
+
+module.exports = JsonpatchHandler;

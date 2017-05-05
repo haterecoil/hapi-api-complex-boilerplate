@@ -2,20 +2,21 @@ const jwt = require('hapi-auth-jwt2');
 
 exports.register = (server, options, next) => {
 
-  function validate() {
+  const validate = (decoded, request, callback) => {
     // todo: real authentification validation should take place here
-    return true;
-  }
+    return callback(null, true);
+  };
 
   function registerAuth(err) {
     if (err) {
-      return err;
+      server.log(['error'], err);
+      throw err;
     }
 
-    server.auth.strategy('jwt', 'jwt', {
-      key: process.env.JWT_SECRET_KEY,
+    server.auth.strategy('jwt', 'jwt', true, {
+      key: options.jwtSecret,
       validateFunc: validate,
-      verifyOptions: { algorithms: ['HS512'] },
+      verifyOptions: { algorithms: ['HS256'] }
     });
 
     return next();
@@ -26,5 +27,5 @@ exports.register = (server, options, next) => {
 
 exports.register.attributes = {
   name: 'auth-jwt',
-  version: '1.0.0',
+  version: '1.0.0'
 };

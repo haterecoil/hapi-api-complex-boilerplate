@@ -18,6 +18,3 @@ lab.test('AuthentificationHandler should need a correct TokenManager', (done) =>
 
   done();
 });
-
-lab.test('')
-

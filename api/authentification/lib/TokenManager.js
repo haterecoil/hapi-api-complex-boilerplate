@@ -18,6 +18,7 @@ class TokenManager {
   }
 
   createTokenForId(id) {
+    console.log(this.config.secret);
     return jwt.sign(
       { id },
       this.config.secret,
