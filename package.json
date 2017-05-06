@@ -32,6 +32,7 @@
   },
   "scripts": {
     "start": "node server.js",
+    "testDev": "./node_modules/.bin/lab api -cv --coverage-exclude middlewares",
     "test": "./node_modules/istanbul/lib/cli.js cover ./node_modules/.bin/lab api -cv --coverage-exclude middlewares;",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
   },

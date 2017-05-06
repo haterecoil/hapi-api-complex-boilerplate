@@ -21,13 +21,16 @@ class ImageResize {
       },
       handler(request, reply) {
         try {
-          ImageResize.getThumbnailBuffer(
-            request.payload.imageUrl,
-            (buffah) => {
-              reply(buffah).type('image/*'); // not the cleanest but it works fine
-            });
+          ImageResize
+            .getThumbnailBufferPromise(request.payload.imageUrl)
+            .then((data) => {
+              reply(data).type('image/*');
+            })
+            .catch((err) => {
+              reply(Boom.badRequest(err.message))
+            })
         } catch (err) {
-          reply(Boom.badRequest());
+          reply(Boom.badRequest(err.message));
         }
       }
     };
@@ -36,23 +39,23 @@ class ImageResize {
   /**
    * Fetches a raw image from url and resizes it to 50px;
    *
-   * Sorry about callback hell, I do not know much yet about streams
-   * and hesitated about chosing a promise based request library. Well,
-   * ain't so bad !?
    * @param imageUrl string
    * @param callback
    */
-  static getThumbnailBuffer(imageUrl, callback) {
-    httpRequest
-      .defaults({ encoding: null })
-      .get(imageUrl, (err, response, buffer) => {
-        sharp(buffer).resize(50).toBuffer((sharpErr, sharpData) => {
+  static getThumbnailBufferPromise(imageUrl) {
+    return new Promise((resolve, reject) => {
+      // make request
+      httpRequest
+        .defaults({ encoding: null })
+        .get(imageUrl, (err, response, buffer) => {
           if (err) {
-            throw sharpErr;
+            reject(err);
+            return;
           }
-          callback(sharpData);
+          // resize image
+          resolve(sharp(buffer).resize(50).toBuffer());
         });
-      });
+    });
   }
 }
 
