@@ -21,10 +21,10 @@ Routes
 |----|-----|-------|-------|
 |GET  |/documentation        | |         documentation
 |POST |/image/thumbnail      | {imageUrl: string} |         Resizes an image at 50px
-|POST |/json/patch           | {jsonToPathc: object, patches: array\|\|object} |         Patches a JSON
-|GET  |/swagger.json         | |         -
-|GET  |/swaggerui/{path*}    | |         -
-|GET  |/swaggerui/extend.js  | |         -
+|POST |/json/patch           | {jsonToPathc: object, patches: array, object} |         Patches a JSON
+|GET  |/swagger.json         | |
+|GET  |/swaggerui/{path*}    | |
+|GET  |/swaggerui/extend.js  | |
 |POST |/token                | {username:string, password:string}|         Provides a JWT
 
 ## Setup
