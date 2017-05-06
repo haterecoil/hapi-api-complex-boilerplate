@@ -21,9 +21,9 @@ exports.register = (server, options, next) => {
           'hapi-swagger': {
             produces: ['image']
           }
-        },
-        auth: false },
-        ImageResize.getThumbnailHandler())
+        }
+      },
+      ImageResize.getThumbnailHandler())
     }
   ]);
 

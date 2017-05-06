@@ -4,9 +4,22 @@ const jsonpatch = require('fast-json-patch');
 
 class JsonpatchHandler {
   static getPatchHandler() {
+    // key 'patches' also accepts a single object (as SC stated in the specs)
     const requestSchema = Joi.object().keys({
-      jsonToPatch: Joi.object().required().min(1).description('A JSON object to patch'),
-      patches: Joi.array().items(Joi.object().required().min(1)).required().description('An array of valid JSON patches')
+      jsonToPatch: Joi
+        .object()
+        .required()
+        .min(1)
+        .description('A JSON object to patch'),
+      patches: Joi
+        .array()
+        .items(
+          Joi.object()
+            .required()
+            .min(1))
+        .single()
+        .required()
+        .description('An array of valid JSON patches')
     });
     return {
       validate: {
@@ -25,6 +38,12 @@ class JsonpatchHandler {
     };
   }
 
+  /**
+   * Both modifies and returns the jsonToPatch
+   * @param jsonToPatch
+   * @param patches
+   * @returns {*}
+   */
   static patch(jsonToPatch, patches) {
     const validate = patches.length > 1000;
     jsonpatch.apply(jsonToPatch, patches, validate);

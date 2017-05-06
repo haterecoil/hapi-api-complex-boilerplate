@@ -4,7 +4,12 @@
 
 const Joi = require('joi');
 
+/**
+ * Generates a custom authentification handler from a few options.
+ */
 class AuthentificationHandler {
+
+  // a sort of DI
   constructor(tokenManager) {
     if (typeof tokenManager === 'undefined') {
       throw Error('No token manager was provided !');
@@ -15,6 +20,10 @@ class AuthentificationHandler {
     this.tokenManager = tokenManager;
   }
 
+  /**
+   * Returns a valid token for any username/password combination
+   * @returns {{validate: {payload}, handler: (function(*, *))}}
+   */
   getJwtToken() {
     const tokenManager = this.tokenManager;
     const requestSchema = Joi.object().keys({

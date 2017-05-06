@@ -12,9 +12,11 @@ exports.lab = lab;
 const server = new Hapi.Server({ debug: false });
 
 lab.test('middleware jwtAuthStrategy should register', (done) => {
-  server.connection();
+  const serverBis = new Hapi.Server({ debug: false });
 
-  server.register(
+  serverBis.connection();
+
+  serverBis.register(
     middleware,
     (err) => {
       expect(err).not.to.exist;
@@ -32,4 +34,5 @@ lab.experiment('middleware jwtAuthStrategy', () => {
       (err) => { done();}
     );
   });
+
 });

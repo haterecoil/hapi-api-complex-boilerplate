@@ -3,7 +3,7 @@ const Boom = require('boom');
 const httpRequest = require('request');
 const sharp = require('sharp');
 
-class ImageResize {
+class ImageresizeHandler {
 
   /**
    * Returns the thumbnail handler
@@ -12,7 +12,7 @@ class ImageResize {
    */
   static getThumbnailHandler() {
     const requestSchema = Joi.object().keys({
-      imageUrl: Joi.string().uri({ scheme: ['http', 'https'] }).required()
+      imageUrl: Joi.string().uri({ scheme: ['http', 'https'] }).required().description('A valid image uri')
     }).required();
     return {
       validate: {
@@ -20,18 +20,14 @@ class ImageResize {
         headers: Joi.object({ authorization: Joi.string().required() }).unknown()
       },
       handler(request, reply) {
-        try {
-          ImageResize
-            .getThumbnailBufferPromise(request.payload.imageUrl)
-            .then((data) => {
-              reply(data).type('image/*');
-            })
-            .catch((err) => {
-              reply(Boom.badRequest(err.message))
-            })
-        } catch (err) {
-          reply(Boom.badRequest(err.message));
-        }
+        ImageresizeHandler
+          .getThumbnailBufferPromise(request.payload.imageUrl)
+          .then((data) => {
+            reply(data).type('image/*');
+          })
+          .catch((err) => {
+            reply(Boom.badRequest(err.message))
+          });
       }
     };
   }
@@ -59,4 +55,4 @@ class ImageResize {
   }
 }
 
-module.exports = ImageResize;
+module.exports = ImageresizeHandler;
