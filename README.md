@@ -21,7 +21,7 @@ Routes
 |----|-----|-------|-------|
 |GET  |/documentation        | |         documentation
 |POST |/image/thumbnail      | {imageUrl: string} |         Resizes an image at 50px
-|POST |/json/patch           | {jsonToPathc: object, patches: array, object} |         Patches a JSON
+|POST |/json/patch           | {jsonToPathc: object, patches: array \|\| object} |         Patches a JSON
 |GET  |/swagger.json         | |
 |GET  |/swaggerui/{path*}    | |
 |GET  |/swaggerui/extend.js  | |
