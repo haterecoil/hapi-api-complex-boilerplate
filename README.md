@@ -1,4 +1,8 @@
-# SocialCops Node Task
+# Node Task
+
+image resizing, json patching and JWT authentification
+
+[![Coverage Status](https://coveralls.io/repos/haterecoil/hapi-api-complex-boilerplate/badge.svg?branch=master)](https://coveralls.io/r/haterecoil/hapi-api-complex-boilerplate?branch=master)
 
 On my way of learning modern NodeJS I crawled LOADS of websites and started
 an architecture draft.
